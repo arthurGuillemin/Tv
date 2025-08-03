@@ -10,6 +10,12 @@ exports.searchMovie = async (req, res, next) => {
   }
 };
 
+exports.getAllMovies = async (req, res) => {
+  const movies = await movieService.getAllMovies();
+  res.json(movies);
+};
+
+
 exports.addMovie = async (req, res, next) => {
   try {
     const { tmdbId } = req.body;

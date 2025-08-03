@@ -1,10 +1,19 @@
 const { searchTmdbMovie, getMovieDetailsById } = require('../utils/tmdb');
 const supabase = require('../utils/supabase');
 
+
+exports.getAllMovies = async () => {
+  const { data, error } = await supabase.from('movies').select('*');
+  if (error) throw error;
+  return data;
+};
+
 exports.searchMovie = async (title) => {
   if (!title) throw new Error('Missing movie title');
   return await searchTmdbMovie(title);
 };
+
+
 
 exports.addMovie = async (tmdbId) => {
   if (!tmdbId) throw new Error('tmdbId is required');
